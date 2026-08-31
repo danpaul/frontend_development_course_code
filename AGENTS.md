@@ -1,6 +1,6 @@
 # Agent conventions
 
-This repo is a Next.js App Router app. Today `/` is a single-user todo list (`Todoish`), not a hot-sauce catalog. Do not invent product pages, auth, or extra routes.
+This repo is a Next.js App Router app. Today `/` is a single-user todo list (`Todoish`).
 
 Stack that differs from older training data: Next 16, React 19, Prisma 7 (SQLite; generated client in `src/generated/prisma`), Tailwind 4, Storybook 10, Vitest browser + Playwright.
 
@@ -38,7 +38,7 @@ Plain class maps / conditionals inside the component. Do not add CVA, clsx, tail
 
 ## Accessibility
 
-Rely on native element semantics and keyboard behavior. Visible focus ring is required. Loading uses native `disabled` plus `aria-disabled`.
+Rely on native element semantics and keyboard behavior. Loading uses native `disabled` plus `aria-disabled`.
 
 ## Prisma in UI
 

@@ -10,6 +10,9 @@ import { playwright } from '@vitest/browser-playwright';
 const dirname =
   typeof __dirname !== 'undefined' ? __dirname : path.dirname(fileURLToPath(import.meta.url));
 
+/*
+ * Vitest projects: storybook, components, and actions.
+ */
 // More info at: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon
 export default defineConfig({
   resolve: {

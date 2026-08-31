@@ -1,3 +1,6 @@
+/*
+ * Storybook config. Uses Vite (`@storybook/nextjs-vite`), not the Next.js bundler.
+ */
 import type { StorybookConfig } from '@storybook/nextjs-vite';
 
 const config: StorybookConfig = {

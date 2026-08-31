@@ -1,3 +1,6 @@
+/*
+ * Atomic Design atom. Tailwind variants are defined in this file.
+ */
 import { forwardRef, type ComponentProps } from "react";
 
 export type ButtonProps = Omit<ComponentProps<"button">, "ref"> & {

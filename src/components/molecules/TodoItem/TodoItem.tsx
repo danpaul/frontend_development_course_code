@@ -48,9 +48,11 @@ const TodoItem = function TodoItem({ todo, onUpdate, onDelete }: TodoItemProps) 
     setEditing(false);
   }
 
+  // delete the todo
   async function handleDelete() {
     setDeleting(true);
     try {
+      // call the server action to delete the todo
       await onDelete(todo.id);
     } finally {
       setDeleting(false);

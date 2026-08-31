@@ -27,6 +27,7 @@ const TodoList = function TodoList({
       <ul>
         {todos.map((todo) => (
           <li key={todo.id}>
+            {/* TodoItem receives individual todo and functions to update and delete it (ultimately these are executed by the server actions) */}
             <TodoItem todo={todo} onUpdate={onUpdate} onDelete={onDelete} />
           </li>
         ))}
