@@ -64,4 +64,6 @@ Execute using `npm run [name of script]`
 └── AGENTS.md                        # conventions for this repo
 ```
 
-To explore the codebase, starte with `src\app\page.tsx`.
+To explore the codebase, start with `src\app\page.tsx`.
+
+Review Prisma Schema in `prisma\schema.prisma`
