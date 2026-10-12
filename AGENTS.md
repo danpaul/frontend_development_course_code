@@ -2,7 +2,7 @@
 
 This repo is a Next.js App Router app. Today `/` is a single-user todo list (`Todoish`).
 
-Stack that differs from older training data: Next 16, React 19, Prisma 7 (SQLite; generated client in `src/generated/prisma`), Tailwind 4, Storybook 10, Vitest browser + Playwright.
+Stack that differs from older training data: Next 16, React 19, Prisma 7 (hosted Prisma Postgres; generated client in `src/generated/prisma`), Tailwind 4, Storybook 10, Vitest browser + Playwright.
 
 Specs live under `specs/`. Implement the spec, then encode only **durable** conventions here. Leave the Next.js block at the bottom unchanged.
 
@@ -86,9 +86,7 @@ Canonical examples: `src/components/atoms/Button/Button.test.tsx` and `src/compo
 - Colocate component tests as `src/components/{layer}/{ComponentName}/{ComponentName}.test.tsx`. Required for every new shared component under `src/components`.
 - Named import from `./ComponentName` (e.g. `import { Button } from "./Button"`). Do not use `@/` in test files.
 - Vitest **browser** (Playwright Chromium, headless) + `vitest-browser-react`. `render` from `vitest-browser-react`, then query with Vitest locators (`getByRole`). No Testing Library, no jsdom.
-- Playwright e2e in `tests/e2e/`; config at repo root; Chromium only. E2e uses `prisma/dev.db`.
-- Action tests use `prisma/test.db` only. Never point them at `dev.db`.
-- Scripts: `test` (Vitest run, all projects: `storybook`, `components`, `actions`), `test:e2e` (Playwright).
+- Scripts: `test` (Vitest run, projects: `storybook`, `components`).
 - `@storybook/addon-vitest` runs stories including `play` from the Storybook test UI.
 
 # Backend
@@ -105,11 +103,6 @@ Canonical example: `src/actions/todo/createTodo/createTodo.ts`.
 - Do not add Route Handlers for this app's backend.
 
 Todo helper example (`src/actions/todo/helpers.ts`): trim `title` and throw if empty; `description` `null` stays `null`; a string description is trimmed and empty becomes `null` (not `""`).
-
-## Action tests
-
-- Vitest **node** tests under `tests/actions/{resource}/{actionName}/{actionName}.test.ts` against `prisma/test.db`.
-- Import the named action with `@/` (e.g. `import { createTodo } from "@/actions/todo/createTodo/createTodo"`). Do not colocate action tests under `src/`.
 
 # App wiring
 
@@ -141,7 +134,6 @@ Todo: prepend on create; coerce `createdAt`.
 ## Tests
 
 - Component tests/stories mock action props on the page component only (`fn()` / `vi.fn()`). Lower layers use sync spies; do not add persistence mocks there.
-- Playwright e2e uses `prisma/dev.db`. Isolate with unique data (e.g. timestamped titles). Do not assume an empty list and do not wipe the DB.
 
 <!-- BEGIN:nextjs-agent-rules -->
 

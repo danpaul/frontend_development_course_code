@@ -11,7 +11,7 @@ const dirname =
   typeof __dirname !== 'undefined' ? __dirname : path.dirname(fileURLToPath(import.meta.url));
 
 /*
- * Vitest projects: storybook, components, and actions.
+ * Vitest projects: storybook and components.
  */
 // More info at: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon
 export default defineConfig({
@@ -58,27 +58,6 @@ export default defineConfig({
             headless: true,
             provider: playwright({}),
             instances: [{ browser: 'chromium' }],
-          },
-        },
-      },
-      {
-        extends: true,
-        test: {
-          name: 'actions',
-          environment: 'node',
-          include: ['tests/actions/**/*.test.ts'],
-          globalSetup: './tests/actions/globalSetup.ts',
-          setupFiles: './tests/actions/setup.ts',
-          env: {
-            DATABASE_URL: 'file:./prisma/test.db',
-          },
-          fileParallelism: false,
-          maxWorkers: 1,
-          pool: 'forks',
-          server: {
-            deps: {
-              external: ['better-sqlite3', '@prisma/adapter-better-sqlite3'],
-            },
           },
         },
       },

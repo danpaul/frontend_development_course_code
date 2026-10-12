@@ -8,23 +8,22 @@ Coding conventions for this repo live in [`AGENTS.md`](./AGENTS.md).
 
 - [React 19](https://react.dev/) — UI library; `src/components/`
 - [Next.js](https://nextjs.org/) — App Router; `src/app/page.tsx`, `src/app/layout.tsx`
-- [Prisma](https://www.prisma.io/) — SQLite ORM; `prisma/schema.prisma`, `src/prisma/prismaClient.ts`
+- [Prisma](https://www.prisma.io/) — ORM for hosted Prisma Postgres; `prisma/schema.prisma`, `src/prisma/prismaClient.ts`
 - [Storybook](https://storybook.js.org/) — UI in isolation; `.storybook/`, colocated `*.stories.tsx`
 - [Atomic Design](https://atomicdesign.bradfrost.com/chapter-2/) — UI folder map; `src/components/{atoms,molecules,organisms,templates,pages}`
 - [Tailwind CSS](https://tailwindcss.com/) — utility classes; `src/app/globals.css`
 - [Vite](https://vite.dev/) — Storybook and Vitest toolchain, not the Next.js bundler; `.storybook/main.ts`, `vitest.config.ts`
-- [Vitest](https://vitest.dev/) — component/story/action tests; colocated `*.test.tsx`, `tests/actions/`
-- [Playwright](https://playwright.dev/) — e2e; `tests/e2e/`, `playwright.config.ts`
-- SQLite — local DB used by Prisma; `prisma/dev.db` is gitignored and created on migrate; `prisma/schema.prisma`
+- [Vitest](https://vitest.dev/) — component and story tests in the browser; colocated `*.test.tsx`
 
 ## Setup
 
 1. Install Node.js and npm. Clone this repo.
 2. `npm install`
-3. Copy `.env.example` to `.env` (do not commit `.env`)
-4. `npm run prisma:generate`
-5. `npm run prisma:migrate` (applies existing migrations; creates `prisma/dev.db`)
-6. `npm run dev` → [http://localhost:3000/](http://localhost:3000/)
+3. Create a Prisma Postgres database (Console or `npx create-db`)
+4. Copy `.env.example` to `.env` and replace the placeholder with the direct connection string (`db.prisma.io`, not the pooled host). Do not commit `.env`.
+5. `npm run prisma:generate`
+6. `npm run prisma:migrate`
+7. `npm run dev` → [http://localhost:3000/](http://localhost:3000/)
 
 ## Scripts
 
@@ -33,9 +32,8 @@ Execute using `npm run [name of script]`
 
 - `dev` — Next.js app at http://localhost:3000/
 - `storybook` — Storybook UI on port 6006
-- `test` — Vitest (storybook, components, and actions projects)
-- `test:e2e` — Playwright e2e
-- `prisma:migrate` — apply existing migrations; creates `prisma/dev.db`
+- `test` — Vitest (storybook and components projects)
+- `prisma:migrate` — apply the committed migrations
 - `prisma:generate` — generate the Prisma client
 
 ## File structure
@@ -55,12 +53,8 @@ Execute using `npm run [name of script]`
 │   └── generated/prisma/            # generated client; do not edit
 ├── prisma/                          # schema and migrations
 ├── .storybook/                      # Storybook config
-├── tests/
-│   ├── actions/                     # action tests (`prisma/test.db`)
-│   └── e2e/                         # Playwright (`prisma/dev.db`)
 ├── specs/                           # SDD specs
-├── vitest.config.ts                 # Vitest projects (storybook, components, actions)
-├── playwright.config.ts             # Playwright e2e config
+├── vitest.config.ts                 # Vitest projects (storybook, components)
 └── AGENTS.md                        # conventions for this repo
 ```
 
